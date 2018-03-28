@@ -53,6 +53,16 @@
       <artifactId>spring-boot-devtools</artifactId>
     </dependency>
 
+  <!-- Session -->
+    <dependency>
+      <groupId>org.springframework.session</groupId>
+      <artifactId>spring-session-data-redis</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>redis.clients</groupId>
+      <artifactId>jedis</artifactId>
+    </dependency>
+
   <!-- DB -->
     <dependency>
       <groupId>com.h2database</groupId>

@@ -66,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .usernameParameter("username").passwordParameter("password");
 
     // ログアウト設定
-    http.logout().logoutUrl("/logout").logoutSuccessUrl(UrlConstant.LOGIN);
+    http.logout().logoutUrl(UrlConstant.LOGOUT).logoutSuccessUrl(UrlConstant.LOGIN);
   }
 
   @Override
