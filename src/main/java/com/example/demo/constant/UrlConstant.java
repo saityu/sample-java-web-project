@@ -17,6 +17,9 @@ public class UrlConstant {
   /** ログイン. */
   public static final String LOGIN = UrlConstant.BASE + "login";
 
+  /** ログアウト. */
+  public static final String LOGOUT = UrlConstant.BASE + "logout";
+
   /** 認証. */
   public static final String AUTHENTICATE = UrlConstant.BASE + "authenticate";
 

@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.example.demo.dto.LoginUserDetailDto;
+import com.example.demo.dto.UserRoleDto;
+import com.example.demo.mapper.UserRoleMapper;
 
 /**
  * UserDetailsService実装クラス.
@@ -21,6 +23,9 @@ import com.example.demo.dto.LoginUserDetailDto;
  */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+
+  @Autowired
+  UserRoleMapper userRoleMapper;
 
   @Autowired
   PasswordEncoder passwordEncoder;
@@ -39,15 +44,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
       throw new UsernameNotFoundException("ユーザーIDが未入力です");
     }
 
-    // ユーザー情報取得 TODO:DBから取得する
-    LoginUserDetailDto loginUserDetailDto =
-        new LoginUserDetailDto(username, this.passwordEncoder.encode("pass"),
-            AuthorityUtils.createAuthorityList("ROLE_ADMIN", "ROLE_USER"));
+    // ユーザーロール情報取得
+    UserRoleDto userRoleDto = userRoleMapper.selectUserRole(username);
     // 入力値チェック
-    if (StringUtils.isBlank(loginUserDetailDto.getUsername())) {
+    if (StringUtils.isBlank(userRoleDto.getUsername())) {
       throw new UsernameNotFoundException("ユーザーIDが不正です");
     }
-
-    return loginUserDetailDto;
+    return new LoginUserDetailDto(username, this.passwordEncoder.encode(userRoleDto.getPassword()),
+        AuthorityUtils.createAuthorityList(userRoleDto.getRoleName()));
   }
 }

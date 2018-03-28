@@ -3,9 +3,12 @@
  */
 package com.example.demo.dto;
 
+import java.io.Serializable;
 import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,9 +20,10 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class LoginUserDetailDto extends User {
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
+public class LoginUserDetailDto extends User implements Serializable {
 
-  // 必要な情報があれば追加
+  UserRoleDto userRoleDto;
 
   /**
    * コンストラクタ.
@@ -28,6 +32,7 @@ public class LoginUserDetailDto extends User {
    * @param password
    * @param authorities
    */
+  @JsonCreator
   public LoginUserDetailDto(String username, String password,
       Collection<? extends GrantedAuthority> authorities) {
     super(username, password, authorities);
