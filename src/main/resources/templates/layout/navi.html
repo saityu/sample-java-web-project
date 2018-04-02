@@ -36,7 +36,10 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">Setting</a>
-            <a class="dropdown-item" href="#">Sign out</a>
+            <form id="logout_link" method="post" th:action="@{'/logout'}">
+              <input type="hidden" value="Sign out" />
+              <a class="dropdown-item" href="javascript:logout_link.submit()">Sign out</a>
+            </form>
           </div>
         </div>
       </div>
