@@ -47,7 +47,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     // ユーザーロール情報取得
     UserRoleDto userRoleDto = userRoleMapper.selectUserRole(username);
     // 入力値チェック
-    if (StringUtils.isBlank(userRoleDto.getUsername())) {
+    if (userRoleDto == null || StringUtils.isBlank(userRoleDto.getUsername())) {
       throw new UsernameNotFoundException("ユーザーIDが不正です");
     }
     return new LoginUserDetailDto(username, this.passwordEncoder.encode(userRoleDto.getPassword()),
