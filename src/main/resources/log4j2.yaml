@@ -1,0 +1,22 @@
+Configuration:
+  status: warn
+
+  Appenders:
+    Console:
+      name: CONSOLE
+      target: SYSTEM_OUT
+      PatternLayout:
+        Pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %c{3} - %msg%n"
+
+  Loggers:
+    Logger:
+      - name: com.example.demo
+        additivity: false
+        level: debug
+        AppenderRef:
+          - ref: CONSOLE
+
+    Root:
+      level: warn
+      AppenderRef:
+        ref: CONSOLE
